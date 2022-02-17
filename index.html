@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fi">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8"/>
+        <link rel="stylesheet" href="frontpage.css" type="text/css">
+        <title>Olli Peltomaa</title>
+    </head>
+    <body>
+        <div id="top">
+            <p id="logo">&lt;Olli/&gt;</p>
+
+            <p id="changing">Olli Peltomaa on <span id="role">YRITTÄJÄ</span></p>
+
+            <nav id="navigation">
+                <p class="link" onclick="changeComponent('info')" style="color: #FFBA08;" >Kuka?</p>
+                <p class="link" onclick="changeComponent('projects')">Projektit</p>
+                <p class="link" onclick="changeComponent('contact')">Ota yhteyttä</p>
+            </nav>
+        </div>
+
+        <div id="info" class="component">
+            <h1>Kuka?</h1>
+
+            <div id="imgcontainer">
+                <img id="ollikuva" src="laiturikuva.JPG" alt="olli">
+            </div>
+
+            <p class="about">
+                Olen 24-vuotias tietotekniikan opiskelija ja toiminimiyrittäjä Jyväskylästä. 
+                Etsin ensimmäistä oman alan työpaikkaani kesälle 2022 Jyväskylän alueelta. 
+                Minua erityisesti kiinnostavia työnimikkeitä ovat esimerkiksi frontend-kehittäjä
+                tai lähes mikä tahansa junior-positio, jossa pääsisin kehittämään itseäni 
+                ohjelmoijana.
+            </p>
+            <p class="about">
+                Olen toisen vuoden tietotekniikan opiskelija Jyväskylän yliopistosta sivuaineenani tilastotiede. 
+                Painotan pääaineopintojani ohjelmistotekniikkaan. Opintojen kautta olen tutustunut C#-, Java -ja R-ohjelmointiin.
+            </p>
+            <p class="about">
+                Lyhyellä ohjelmointiurallani olen kerennyt perustaa toiminimen, jonka kautta olen tehnyt verkkosivuja 
+                parille eri asiakkaalle. Töissäni käyttämiä teknologioita ovat HTML, CSS, Javascript, React.js ja PHP. 
+            </p>
+            <p class="about">
+                <b>Y-tunnus: 3223214-8</b>
+            </p>     
+        </div>
+
+        <div id="projects" class="component" style="display: none;">
+            <h1>Projektit</h1>
+            <p class="about">
+                <h3>Vapaa-ajan projektit</h3>
+                <a href="hangman/" class="project">Hangman</a>
+                <h3>Opintoihin liittyvät projektit</h3>
+                <a href="https://gitlab.jyu.fi/peltolma" class="project">Gitlab</a>
+            </p>
+        </div>
+
+        <div class="component" style="display: none;" id="contact">
+            <h1 id="contactHeader">Ota yhteyttä</h1>
+            <form method="POST" action="sendmail.php" id="contactForm">
+                <input type="text" name="name" placeholder="Nimi" class="contactinfo">
+                <input type="text" name="e-mail" placeholder="Sähköposti" class="contactinfo">
+                <textarea name="msg" id="msg" rows="7" placeholder="Viesti" ></textarea>
+                <span id="error" name="error"></span>
+                <input type="submit" id="snd">
+            </form>
+            <a href="https://www.linkedin.com/in/olli-peltomaa-baa60377/" id="linkkari">
+                <img src="LI-LogoBW.png" alt="linkedin" id="linkedlogo">
+            </a>
+        </div>
+
+        <div id="foot">
+            <p>&copy; Olli Peltomaa 2021</p>
+        </div>
+
+        <script>
+            const role = document.getElementById("role");
+            const roles = ['DEVAAJA', 'OPISKELIJA', 'YRITTÄJÄ'];
+            let counter = 0;
+            const components = document.getElementsByClassName("component");
+            const links = document.getElementsByClassName("link");
+
+            setInterval(changeText, 2000);
+            
+            function changeText() {
+                role.textContent = roles[counter];
+                counter++;
+                if (counter >= roles.length) {
+                    counter = 0;
+                }
+            }
+
+            function changeComponent(sel) {
+                for (i = 0; i < components.length; i++) {
+                    components[i].style.display = "none";
+                }
+                document.getElementById(sel).style.display = "block";
+
+                for (i = 0; i < links.length; i++) {
+                    links[i].style.color = "white";
+                }
+
+                switch (sel) {
+                    case 'info':
+                        links[0].style.color = "#FFBA08";
+                        break;
+                    case 'projects':
+                        links[1].style.color = "#FFBA08";
+                        break;
+                    case 'contact':
+                        links[2].style.color = "#FFBA08";
+                        break;
+                    default:
+                        break;
+                }
+            }
+        </script>
+    </body>
+
+</html>
